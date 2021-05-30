@@ -18,43 +18,6 @@ namespace yoloTest
     {
         public static string imageLocation = "";
 
-        VideoCapture capture;
-        Mat frame;
-        Bitmap image;
-        private Thread camera;
-        bool isCameraRunning = false;
-
-
-        // Declare required methods
-        private void CaptureCamera()
-        {
-            camera = new Thread(new ThreadStart(CaptureCameraCallback));
-            camera.Start();
-        }
-
-        private void CaptureCameraCallback()
-        {
-
-            frame = new Mat();
-            capture = new OpenCvSharp.VideoCapture(1);
-            capture.Open(0);
-
-            if (capture.IsOpened())
-            {
-                while (isCameraRunning)
-                {
-
-                    capture.Read(frame);
-                    image = BitmapConverter.ToBitmap(frame);
-                    if (pictureBox1.Image != null)
-                    {
-                        pictureBox1.Image.Dispose();
-                    }
-                    pictureBox1.Image = image;
-                }
-            }
-        }
-
 
 
         public Form1()
@@ -95,12 +58,12 @@ namespace yoloTest
                         var pen = new Pen(Color.Red, 5);
                         var point = new System.Drawing.Point(x, y);
 
-                        if (item.Type == "person")
-                        {
+                      //  if (item.Type == "person")
+                  //      {
                             graphics.DrawRectangle(pen, rectangle);
                             string thisBoxString = item.Type + Environment.NewLine + "Confidence: " + item.Confidence;
                             graphics.DrawString(thisBoxString, font, brush, point);
-                        }
+                     //   }
 
 
                     }
@@ -132,47 +95,6 @@ namespace yoloTest
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
-        {
 
-        }
-
-        private void cameraToggleBtn_Click(object sender, EventArgs e)
-        {
-            if (cameraToggleBtn.Text.Equals("Start"))
-            {
-                CaptureCamera();
-                cameraToggleBtn.Text = "Stop";
-                isCameraRunning = true;
-            }
-            else
-            {
-                capture.Release();
-                cameraToggleBtn.Text = "Start";
-                isCameraRunning = false;
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-            {
-                if (isCameraRunning)
-                {
-                    // Take snapshot of the current image generate by OpenCV in the Picture Box
-                    Bitmap snapshot = new Bitmap(pictureBox1.Image);
-
-                    // Save in some directory
-                    // in this example, we'll generate a random filename e.g 47059681-95ed-4e95-9b50-320092a3d652.png
-                    // snapshot.Save(@"C:\Users\sdkca\Desktop\mysnapshot.png", ImageFormat.Png);
-                    snapshot.Save(string.Format(@"C:\Users\sdkca\Desktop\{0}.png", Guid.NewGuid()), ImageFormat.Png);
-                }
-                else
-                {
-                    Console.WriteLine("Cannot take picture if the camera isn't capturing image!");
-                }
-
-            }
-        }
     }
 }
