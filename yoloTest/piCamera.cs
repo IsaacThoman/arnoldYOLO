@@ -17,19 +17,19 @@ namespace yoloTest
     {
         public static Bitmap test(int cameraNumber)
         {
-            string cameraURL = "http://192.168.1.29:8081/103/current";
+            string cameraURL = "http://192.168.1.29:8081/100/current";
 
             if(cameraNumber == 1)
             {
-                cameraURL = "http://192.168.1.29:8081/103/current";
+                cameraURL = "http://192.168.1.29:8081/100/current";
             }
             else if (cameraNumber == 2)
             {
-                cameraURL = "http://192.168.1.29:8081/104/current";
+                cameraURL = "http://192.168.1.29:8081/101/current";
             }
         else if(cameraNumber == 3)
             {
-                cameraURL = "http://192.168.1.29:8081/105/current";
+                cameraURL = "http://192.168.1.29:8081/102/current";
             }
 
 

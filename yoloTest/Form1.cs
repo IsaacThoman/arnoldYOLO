@@ -212,8 +212,8 @@ namespace yoloTest
             {
             //   gr.SmoothingMode = SmoothingMode.AntiAlias;
                 Rectangle rect1 = new Rectangle(0, 0, 320, 240);
-                Rectangle rect2 = new Rectangle(320, 240, 640, 480);
-                Rectangle rect3 = new Rectangle(0, 240, 320, 480);
+                Rectangle rect2 = new Rectangle(320, 0, 320, 240);
+                Rectangle rect3 = new Rectangle(0, 240, 320, 240);
                 gr.DrawImage(camera1, rect1);
                 gr.DrawImage(camera2, rect2);
                 gr.DrawImage(camera3, rect3);
