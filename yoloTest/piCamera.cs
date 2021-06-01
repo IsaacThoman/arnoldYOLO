@@ -33,8 +33,7 @@ namespace yoloTest
             }
 
 
-
-    System.Net.WebRequest request =
+            System.Net.WebRequest request =
 System.Net.WebRequest.Create(
 cameraURL);
             System.Net.WebResponse response = request.GetResponse();

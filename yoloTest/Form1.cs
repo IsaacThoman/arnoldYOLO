@@ -180,29 +180,74 @@ namespace yoloTest
             getPiCameras();
 
         }
+        public static Bitmap camera1 = new Bitmap(640, 480);
+        public static Bitmap camera2 = new Bitmap(640, 480);
+        public static Bitmap camera3 = new Bitmap(640, 480);
+
+        public static bool piCam1Running = false;
+        public static bool piCam2Running = false;
+        public static bool piCam3Running = false;
+
+
+        public static void piCamera1()
+        {
+            if (piCam1Running == false)
+            {
+                piCam1Running = true;
+                camera1 = piCamera.test(1);
+                System.Threading.Thread.Sleep(50);
+                piCam1Running = false;
+            }
+
+        }
+        public static void piCamera2()
+        {
+            if (piCam2Running == false)
+            {
+                piCam2Running = true;
+                camera2 = piCamera.test(2);
+                System.Threading.Thread.Sleep(50);
+                piCam2Running = false;
+            }
+        }
+        public static void piCamera3()
+        {
+            if (piCam3Running == false)
+            {
+                piCam3Running = true;
+                camera3 = piCamera.test(3);
+                System.Threading.Thread.Sleep(50);
+                piCam3Running = false;
+            }
+        }
 
         private void getPiCameras()
         {
 
 
             Bitmap testBitmap = new Bitmap(640, 480);
-            Bitmap camera1 = new Bitmap(640, 480);
-            Bitmap camera2 = new Bitmap(640, 480);
-            Bitmap camera3 = new Bitmap(640, 480);
 
+            ThreadStart childref = new ThreadStart(piCamera1);
+            Thread childThread = new Thread(childref);
+
+            ThreadStart childref2 = new ThreadStart(piCamera2);
+            Thread childThread2 = new Thread(childref2);
+
+            ThreadStart childref3 = new ThreadStart(piCamera3);
+            Thread childThread3 = new Thread(childref3);
 
 
             if (piCam1Box.Checked)
             {
-                camera1 = piCamera.test(1);
+                childThread.Start();
             }
             if (piCam2Box.Checked)
             {
-                camera2 = piCamera.test(2);
+                childThread2.Start();
             }
             if (piCam3Box.Checked)
             {
-                camera3 = piCamera.test(3);
+                childThread3.Start();
             }
             
             
