@@ -15,6 +15,7 @@ using OpenCvSharp;
 using Emgu.CV;
 using Emgu.CV.Structure;
 using ImageCapture;
+using AForge.Video;
 
 namespace yoloTest
 {
@@ -166,6 +167,18 @@ namespace yoloTest
                 camera.Stop();
                 cameraOn = false;
             }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+
+
+
+        }
+        public void newImageEvent(Bitmap newImage)
+        {
+            pictureBox1.Image = newImage;
         }
     }
 }

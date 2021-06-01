@@ -17,6 +17,7 @@
     <PackageReference Include="Alturos.YoloV2TinyVocData" Version="1.0.0" />
     <PackageReference Include="Emgu.CV" Version="4.5.1.4349" />
     <PackageReference Include="Emgu.CV.runtime.windows" Version="4.5.1.4349" />
+    <PackageReference Include="Microsoft.Expression.Encoder" Version="4.0.4276.4" />
     <PackageReference Include="OpenCvSharp3-AnyCPU" Version="4.0.0.20181129" />
   </ItemGroup>
 
