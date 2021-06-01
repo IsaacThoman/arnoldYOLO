@@ -37,6 +37,12 @@ namespace yoloTest
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
+            this.checkBoxDOIR = new System.Windows.Forms.CheckBox();
+            this.piCam1Box = new System.Windows.Forms.CheckBox();
+            this.piCam3Box = new System.Windows.Forms.CheckBox();
+            this.piCam2Box = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,14 +50,14 @@ namespace yoloTest
             // 
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(640, 360);
+            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(407, 376);
+            this.button1.Location = new System.Drawing.Point(427, 500);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -61,7 +67,7 @@ namespace yoloTest
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(407, 405);
+            this.button2.Location = new System.Drawing.Point(427, 529);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 2;
@@ -71,7 +77,7 @@ namespace yoloTest
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(326, 378);
+            this.button3.Location = new System.Drawing.Point(346, 502);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(75, 23);
             this.button3.TabIndex = 3;
@@ -87,17 +93,17 @@ namespace yoloTest
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(501, 376);
+            this.checkBox1.Location = new System.Drawing.Point(508, 529);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(118, 19);
+            this.checkBox1.Size = new System.Drawing.Size(136, 19);
             this.checkBox1.TabIndex = 4;
-            this.checkBox1.Text = "Webcam enabled";
+            this.checkBox1.Text = "PC Webcam enabled";
             this.checkBox1.UseVisualStyleBackColor = true;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(326, 404);
+            this.button4.Location = new System.Drawing.Point(346, 528);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 5;
@@ -105,11 +111,79 @@ namespace yoloTest
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(508, 504);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(78, 19);
+            this.checkBox2.TabIndex = 6;
+            this.checkBox2.Text = "Pi camera";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            this.checkBox2.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            // 
+            // timer2
+            // 
+            this.timer2.Interval = 50;
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
+            // 
+            // checkBoxDOIR
+            // 
+            this.checkBoxDOIR.AutoSize = true;
+            this.checkBoxDOIR.Location = new System.Drawing.Point(508, 554);
+            this.checkBoxDOIR.Name = "checkBoxDOIR";
+            this.checkBoxDOIR.Size = new System.Drawing.Size(144, 19);
+            this.checkBoxDOIR.TabIndex = 7;
+            this.checkBoxDOIR.Text = "Do Image Recognition";
+            this.checkBoxDOIR.UseVisualStyleBackColor = true;
+            this.checkBoxDOIR.CheckedChanged += new System.EventHandler(this.checkBoxDOIR_CheckedChanged);
+            // 
+            // piCam1Box
+            // 
+            this.piCam1Box.AutoSize = true;
+            this.piCam1Box.Checked = true;
+            this.piCam1Box.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.piCam1Box.Location = new System.Drawing.Point(13, 503);
+            this.piCam1Box.Name = "piCam1Box";
+            this.piCam1Box.Size = new System.Drawing.Size(67, 19);
+            this.piCam1Box.TabIndex = 8;
+            this.piCam1Box.Text = "piCam1";
+            this.piCam1Box.UseVisualStyleBackColor = true;
+            // 
+            // piCam3Box
+            // 
+            this.piCam3Box.AutoSize = true;
+            this.piCam3Box.Checked = true;
+            this.piCam3Box.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.piCam3Box.Location = new System.Drawing.Point(12, 554);
+            this.piCam3Box.Name = "piCam3Box";
+            this.piCam3Box.Size = new System.Drawing.Size(67, 19);
+            this.piCam3Box.TabIndex = 9;
+            this.piCam3Box.Text = "piCam3";
+            this.piCam3Box.UseVisualStyleBackColor = true;
+            // 
+            // piCam2Box
+            // 
+            this.piCam2Box.AutoSize = true;
+            this.piCam2Box.Checked = true;
+            this.piCam2Box.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.piCam2Box.Location = new System.Drawing.Point(12, 531);
+            this.piCam2Box.Name = "piCam2Box";
+            this.piCam2Box.Size = new System.Drawing.Size(67, 19);
+            this.piCam2Box.TabIndex = 10;
+            this.piCam2Box.Text = "piCam2";
+            this.piCam2Box.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 461);
+            this.ClientSize = new System.Drawing.Size(676, 602);
+            this.Controls.Add(this.piCam2Box);
+            this.Controls.Add(this.piCam3Box);
+            this.Controls.Add(this.piCam1Box);
+            this.Controls.Add(this.checkBoxDOIR);
+            this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.button3);
@@ -133,6 +207,12 @@ namespace yoloTest
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Button button4;
         public System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
+        private System.Windows.Forms.Timer timer2;
+        private System.Windows.Forms.CheckBox checkBoxDOIR;
+        private System.Windows.Forms.CheckBox piCam1Box;
+        private System.Windows.Forms.CheckBox piCam3Box;
+        private System.Windows.Forms.CheckBox piCam2Box;
     }
 }
 

@@ -16,6 +16,7 @@ using Emgu.CV;
 using Emgu.CV.Structure;
 using ImageCapture;
 using AForge.Video;
+using System.Drawing.Drawing2D;
 
 namespace yoloTest
 {
@@ -112,7 +113,7 @@ namespace yoloTest
      //       if (cameraOn == false)
      //       {
                 camera.Start();
-                Thread.Sleep(1000);
+                Thread.Sleep(2000);
                 cameraOn = true;
          //   }
 
@@ -134,14 +135,17 @@ namespace yoloTest
                 if (cameraOn == false)
                 {
                     camera.Start();
-                    Thread.Sleep(1000);
+                    Thread.Sleep(2000);
                     cameraOn = true;
                 }
 
                 Image captured_image = camera.currentImage;
                 pictureBox1.Image = captured_image;
                 // camera.Stop();
-                yoloThingy();
+                if (checkBoxDOIR.Checked) {
+                    yoloThingy();
+                }
+                
                 runningYOLO = false;
 
             }
@@ -173,12 +177,84 @@ namespace yoloTest
         {
 
 
+            getPiCameras();
+
+        }
+
+        private void getPiCameras()
+        {
+
+
+            Bitmap testBitmap = new Bitmap(640, 480);
+            Bitmap camera1 = new Bitmap(640, 480);
+            Bitmap camera2 = new Bitmap(640, 480);
+            Bitmap camera3 = new Bitmap(640, 480);
+
+
+
+            if (piCam1Box.Checked)
+            {
+                camera1 = piCamera.test(1);
+            }
+            if (piCam2Box.Checked)
+            {
+                camera2 = piCamera.test(2);
+            }
+            if (piCam3Box.Checked)
+            {
+                camera3 = piCamera.test(3);
+            }
+            
+            
+            
+
+            using (Graphics gr = Graphics.FromImage(testBitmap))
+            {
+            //   gr.SmoothingMode = SmoothingMode.AntiAlias;
+                Rectangle rect1 = new Rectangle(0, 0, 320, 240);
+                Rectangle rect2 = new Rectangle(320, 240, 640, 480);
+                Rectangle rect3 = new Rectangle(0, 240, 320, 480);
+                gr.DrawImage(camera1, rect1);
+                gr.DrawImage(camera2, rect2);
+                gr.DrawImage(camera3, rect3);
+            }
+            pictureBox1.Image = testBitmap;
+            if (checkBoxDOIR.Checked)
+            {
+                yoloThingy();
+            }
 
 
         }
+
         public void newImageEvent(Bitmap newImage)
         {
             pictureBox1.Image = newImage;
+        }
+
+        private void checkBox2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox2.Checked)
+            {
+                timer2.Enabled = true;
+            }
+            else
+            {
+                timer2.Enabled = false;
+            }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+
+            getPiCameras();
+
+
+        }
+
+        private void checkBoxDOIR_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
