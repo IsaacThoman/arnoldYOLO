@@ -32,18 +32,26 @@ namespace yoloTest
                 cameraURL = "http://192.168.1.29:8081/102/current";
             }
 
-
-            System.Net.WebRequest request =
+            try
+            {
+                System.Net.WebRequest request =
 System.Net.WebRequest.Create(
 cameraURL);
-            System.Net.WebResponse response = request.GetResponse();
-            System.IO.Stream responseStream =
-                response.GetResponseStream();
-            Bitmap bitmapOut = new Bitmap(responseStream);
-            return bitmapOut;
+                System.Net.WebResponse response = request.GetResponse();
+                System.IO.Stream responseStream =
+                    response.GetResponseStream();
+                Bitmap bitmapOut = new Bitmap(responseStream);
+                return bitmapOut;
+            }
+            catch (Exception e)
+            {
+                //  Block of code to handle errors
+            }
+
+            return new Bitmap(640, 480);
 
 
-        }
+    }
 
 
 
