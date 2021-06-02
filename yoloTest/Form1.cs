@@ -54,7 +54,7 @@ namespace yoloTest
                         var y = item.Y;
                         var width = item.Width;
                         var height = item.Height;
-                        var font = new Font("Arial", 40, FontStyle.Bold);
+                        var font = new Font("Arial", 10, FontStyle.Bold);
                         var rectangle = new Rectangle(x, y, width, height);
                         var pen = new Pen(Color.Red, 5);
                         var point = new System.Drawing.Point(x, y);
@@ -195,7 +195,7 @@ namespace yoloTest
             {
                 piCam1Running = true;
                 camera1 = piCamera.test(1);
-                System.Threading.Thread.Sleep(50);
+                System.Threading.Thread.Sleep(300);
                 piCam1Running = false;
             }
 
@@ -206,7 +206,7 @@ namespace yoloTest
             {
                 piCam2Running = true;
                 camera2 = piCamera.test(2);
-                System.Threading.Thread.Sleep(50);
+                System.Threading.Thread.Sleep(300);
                 piCam2Running = false;
             }
         }
@@ -216,7 +216,7 @@ namespace yoloTest
             {
                 piCam3Running = true;
                 camera3 = piCamera.test(3);
-                System.Threading.Thread.Sleep(50);
+                System.Threading.Thread.Sleep(300);
                 piCam3Running = false;
             }
         }
@@ -255,10 +255,34 @@ namespace yoloTest
 
             using (Graphics gr = Graphics.FromImage(testBitmap))
             {
-            //   gr.SmoothingMode = SmoothingMode.AntiAlias;
+                //   gr.SmoothingMode = SmoothingMode.AntiAlias;
+
+
+
                 Rectangle rect1 = new Rectangle(0, 0, 320, 240);
                 Rectangle rect2 = new Rectangle(320, 0, 320, 240);
                 Rectangle rect3 = new Rectangle(0, 240, 320, 240);
+
+
+                if (flip12Pi.Checked)
+                {
+
+                     rect1 = new Rectangle(320, 0, 320, 240);
+                     rect2 = new Rectangle(0, 0, 320, 240);
+                    rect3 = new Rectangle(0, 240, 320, 240);
+                }
+                Rectangle old3 = rect3;
+                Rectangle old1 = rect1;
+
+                if (piFlip13.Checked)
+                {
+                    rect1 = old3;
+                    rect3 = old1;
+                }
+
+
+
+
                 gr.DrawImage(camera1, rect1);
                 gr.DrawImage(camera2, rect2);
                 gr.DrawImage(camera3, rect3);
@@ -300,6 +324,11 @@ namespace yoloTest
         private void checkBoxDOIR_CheckedChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void checkBox3_CheckedChanged(object sender, EventArgs e)
+        {
+            piCamera.flipper = checkBox3.Checked;
         }
     }
 }

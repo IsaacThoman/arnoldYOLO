@@ -13,8 +13,13 @@ using AForge.Video.DirectShow;
 
 namespace yoloTest
 {
+
+
     class piCamera
     {
+
+        public static bool flipper = false;
+
         public static Bitmap test(int cameraNumber)
         {
             string cameraURL = "http://192.168.1.29:8081/100/current";
@@ -25,11 +30,29 @@ namespace yoloTest
             }
             else if (cameraNumber == 2)
             {
-                cameraURL = "http://192.168.1.29:8081/101/current";
+
+                if (flipper == false)
+                {
+                    cameraURL = "http://192.168.1.29:8081/101/current";
+                }
+                else
+                {
+                    cameraURL = "http://192.168.1.29:8081/102/current";
+                }
+               
+
             }
         else if(cameraNumber == 3)
             {
-                cameraURL = "http://192.168.1.29:8081/102/current";
+
+                if (flipper == false)
+                {
+                    cameraURL = "http://192.168.1.29:8081/102/current";
+                }
+                else
+                {
+                    cameraURL = "http://192.168.1.29:8081/101/current";
+                }
             }
 
             try

@@ -43,6 +43,9 @@ namespace yoloTest
             this.piCam1Box = new System.Windows.Forms.CheckBox();
             this.piCam3Box = new System.Windows.Forms.CheckBox();
             this.piCam2Box = new System.Windows.Forms.CheckBox();
+            this.flip12Pi = new System.Windows.Forms.CheckBox();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.piFlip13 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -106,7 +109,7 @@ namespace yoloTest
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 23);
             this.button4.TabIndex = 5;
-            this.button4.Text = "button4";
+            this.button4.Text = "Pi cameras";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -123,7 +126,6 @@ namespace yoloTest
             // 
             // timer2
             // 
-            this.timer2.Interval = 200;
             this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // checkBoxDOIR
@@ -173,11 +175,45 @@ namespace yoloTest
             this.piCam2Box.Text = "piCam2";
             this.piCam2Box.UseVisualStyleBackColor = true;
             // 
+            // flip12Pi
+            // 
+            this.flip12Pi.AutoSize = true;
+            this.flip12Pi.Location = new System.Drawing.Point(99, 503);
+            this.flip12Pi.Name = "flip12Pi";
+            this.flip12Pi.Size = new System.Drawing.Size(86, 19);
+            this.flip12Pi.TabIndex = 11;
+            this.flip12Pi.Text = "Flip 1 and 2";
+            this.flip12Pi.UseVisualStyleBackColor = true;
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(99, 533);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(129, 19);
+            this.checkBox3.TabIndex = 12;
+            this.checkBox3.Text = "Flip 2 and 3 (janker)";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            this.checkBox3.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
+            // 
+            // piFlip13
+            // 
+            this.piFlip13.AutoSize = true;
+            this.piFlip13.Location = new System.Drawing.Point(99, 558);
+            this.piFlip13.Name = "piFlip13";
+            this.piFlip13.Size = new System.Drawing.Size(86, 19);
+            this.piFlip13.TabIndex = 13;
+            this.piFlip13.Text = "Flip 1 and 3";
+            this.piFlip13.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(676, 602);
+            this.Controls.Add(this.piFlip13);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.flip12Pi);
             this.Controls.Add(this.piCam2Box);
             this.Controls.Add(this.piCam3Box);
             this.Controls.Add(this.piCam1Box);
@@ -212,6 +248,9 @@ namespace yoloTest
         private System.Windows.Forms.CheckBox piCam1Box;
         private System.Windows.Forms.CheckBox piCam3Box;
         private System.Windows.Forms.CheckBox piCam2Box;
+        private System.Windows.Forms.CheckBox flip12Pi;
+        private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.CheckBox piFlip13;
     }
 }
 
