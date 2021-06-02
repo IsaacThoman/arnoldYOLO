@@ -46,6 +46,8 @@ namespace yoloTest
             this.flip12Pi = new System.Windows.Forms.CheckBox();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.piFlip13 = new System.Windows.Forms.CheckBox();
+            this.checkBox4 = new System.Windows.Forms.CheckBox();
+            this.YOLOTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,9 +135,9 @@ namespace yoloTest
             this.checkBoxDOIR.AutoSize = true;
             this.checkBoxDOIR.Location = new System.Drawing.Point(508, 554);
             this.checkBoxDOIR.Name = "checkBoxDOIR";
-            this.checkBoxDOIR.Size = new System.Drawing.Size(144, 19);
+            this.checkBoxDOIR.Size = new System.Drawing.Size(119, 19);
             this.checkBoxDOIR.TabIndex = 7;
-            this.checkBoxDOIR.Text = "Do Image Recognition";
+            this.checkBoxDOIR.Text = "Show recognition";
             this.checkBoxDOIR.UseVisualStyleBackColor = true;
             this.checkBoxDOIR.CheckedChanged += new System.EventHandler(this.checkBoxDOIR_CheckedChanged);
             // 
@@ -206,11 +208,28 @@ namespace yoloTest
             this.piFlip13.Text = "Flip 1 and 3";
             this.piFlip13.UseVisualStyleBackColor = true;
             // 
+            // checkBox4
+            // 
+            this.checkBox4.AutoSize = true;
+            this.checkBox4.Location = new System.Drawing.Point(508, 579);
+            this.checkBox4.Name = "checkBox4";
+            this.checkBox4.Size = new System.Drawing.Size(57, 19);
+            this.checkBox4.TabIndex = 14;
+            this.checkBox4.Text = "YOLO";
+            this.checkBox4.UseVisualStyleBackColor = true;
+            this.checkBox4.CheckedChanged += new System.EventHandler(this.checkBox4_CheckedChanged);
+            // 
+            // YOLOTimer
+            // 
+            this.YOLOTimer.Interval = 5000;
+            this.YOLOTimer.Tick += new System.EventHandler(this.YOLOTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 602);
+            this.ClientSize = new System.Drawing.Size(676, 610);
+            this.Controls.Add(this.checkBox4);
             this.Controls.Add(this.piFlip13);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.flip12Pi);
@@ -251,6 +270,8 @@ namespace yoloTest
         private System.Windows.Forms.CheckBox flip12Pi;
         private System.Windows.Forms.CheckBox checkBox3;
         private System.Windows.Forms.CheckBox piFlip13;
+        private System.Windows.Forms.CheckBox checkBox4;
+        private System.Windows.Forms.Timer YOLOTimer;
     }
 }
 

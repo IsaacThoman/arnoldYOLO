@@ -17,64 +17,110 @@ using Emgu.CV.Structure;
 using ImageCapture;
 using AForge.Video;
 using System.Drawing.Drawing2D;
+using System.Diagnostics;
 
 namespace yoloTest
 {
+
+  
     public partial class Form1 : Form
     {
         public static string imageLocation = "";
         bool _streaming;
+        public static int objectCount = 0;
+        public static int[] objectX = new int[100];
+        public static int[] objectY = new int[100];
+        public static int[] objectWidth = new int[100];
+        public static int[] objectHeight = new int[100];
+        public static string[] objectType = new string[100];
+        public static double[] objectConfidence = new double[100];
 
+
+        public static bool yoloRunning = false;
 
         public void yoloThingy()
         {
-            //  pictureBox1.Image = Image.FromFile(imageLocation);
-
-            var configurationDetector = new YoloConfigurationDetector();
-            var config = configurationDetector.Detect();
-
-            using (var yoloWrapper = new YoloWrapper(config))
+            if(yoloRunning == false)
             {
-                using (MemoryStream ms = new MemoryStream())
+                yoloRunning = true;
+                //  pictureBox1.Image = Image.FromFile(imageLocation);
+
+                var configurationDetector = new YoloConfigurationDetector();
+                var config = configurationDetector.Detect();
+
+                using (var yoloWrapper = new YoloWrapper(config))
                 {
-                    pictureBox1.Image.Save(ms, ImageFormat.Png);
-                    var items = yoloWrapper.Detect(ms.ToArray()).ToList();
-                    //  yoloItemBindingSource.DataSource = items;
-
-                    //   AddDetails(pictureBox1, items);
-
-
-                    var image = pictureBox1.Image;
-                    var brush = new SolidBrush(Color.Red);
-                    var graphics = Graphics.FromImage(image);
-
-                    foreach (var item in items)
+                    using (MemoryStream ms = new MemoryStream())
                     {
-                        var x = item.X;
-                        var y = item.Y;
-                        var width = item.Width;
-                        var height = item.Height;
-                        var font = new Font("Arial", 10, FontStyle.Bold);
-                        var rectangle = new Rectangle(x, y, width, height);
-                        var pen = new Pen(Color.Red, 5);
-                        var point = new System.Drawing.Point(x, y);
+                        pictureBox1.Image.Save(ms, ImageFormat.Png);
+                        var items = yoloWrapper.Detect(ms.ToArray()).ToList();
+                        //  yoloItemBindingSource.DataSource = items;
 
-                    //    if (item.Type == "person")
-                   //     {
-                            graphics.DrawRectangle(pen, rectangle);
-                            string thisBoxString = item.Type + Environment.NewLine + "Confidence: " + item.Confidence;
-                            graphics.DrawString(thisBoxString, font, brush, point);
-                    //    }
+                        //   AddDetails(pictureBox1, items);
+                        objectCount = items.Count;
+
+
+
+                        var image = pictureBox1.Image;
+                        var brush = new SolidBrush(Color.Red);
+                        var graphics = Graphics.FromImage(image);
+                        int counter = 0;
+
+                        foreach (var item in items)
+                        {
+
+
+                            objectX[counter] = item.X;
+                            objectY[counter] = item.Y;
+                            objectWidth[counter] = item.Width;
+                            objectHeight[counter] = item.Height;
+                            objectType[counter] = item.Type;
+                            objectConfidence[counter] = item.Confidence;
+                            Debug.WriteLine(item.Type);
+                            counter += 1;
+                        }
+
+
+
 
 
                     }
-                    pictureBox1.Image = image;
-
-
-
-
                 }
+                yoloRunning = false;
             }
+
+        }
+
+
+        public void drawYolo()
+        {
+
+            var image = pictureBox1.Image;
+            var brush = new SolidBrush(Color.Red);
+            var graphics = Graphics.FromImage(image);
+
+            for (int i = 0; i <= objectCount; i++)
+            {
+            var x = objectX[i];
+                var y = objectY[i];
+                var width = objectWidth[i];
+                var height = objectHeight[i];
+                var font = new Font("Arial", 10, FontStyle.Bold);
+                var rectangle = new Rectangle(x, y, width, height);
+                var pen = new Pen(Color.Red, 5);
+                var point = new System.Drawing.Point(x, y);
+
+                //    if (item.Type == "person")
+                //     {
+                graphics.DrawRectangle(pen, rectangle);
+                string thisBoxString = objectType[i] + Environment.NewLine + "Confidence: " + objectConfidence[i];
+                graphics.DrawString(thisBoxString, font, brush, point);
+                //    }
+
+
+            }
+            pictureBox1.Image = image;
+
         }
         public Form1()
         {
@@ -86,7 +132,7 @@ namespace yoloTest
 
 
             yoloThingy();
-
+           drawYolo();
         }
 
 
@@ -143,7 +189,7 @@ namespace yoloTest
                 pictureBox1.Image = captured_image;
                 // camera.Stop();
                 if (checkBoxDOIR.Checked) {
-                    yoloThingy();
+                    drawYolo();
                 }
                 
                 runningYOLO = false;
@@ -290,7 +336,7 @@ namespace yoloTest
             pictureBox1.Image = testBitmap;
             if (checkBoxDOIR.Checked)
             {
-                yoloThingy();
+                drawYolo();
             }
 
 
@@ -329,6 +375,28 @@ namespace yoloTest
         private void checkBox3_CheckedChanged(object sender, EventArgs e)
         {
             piCamera.flipper = checkBox3.Checked;
+        }
+
+        private void checkBox4_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox4.Checked)
+            {
+                YOLOTimer.Enabled = true;
+            }
+            else
+            {
+                YOLOTimer.Enabled = false;
+            }
+        }
+
+        private void YOLOTimer_Tick(object sender, EventArgs e)
+        {
+            ThreadStart YOLOBG = new ThreadStart(yoloThingy);
+            Thread YOLOBG2 = new Thread(YOLOBG);
+
+
+                YOLOBG2.Start();
+            
         }
     }
 }
